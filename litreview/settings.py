@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -93,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'UTC'
 
@@ -109,7 +110,23 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = '/static'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Authentication
+
+LOGIN_URL = 'account:login'
+
+LOGIN_REDIRECT_URL = 'base'
+
+LOGOUT_URL = 'account:logout'
+
+
+# Django crispy forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
