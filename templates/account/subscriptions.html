@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
+{% block style %}
+<style>
+    .form-inline {
+        justify-content: center;
+    }
+</style>
+{% endblock style %}
+
 {% block content %}
     <div class="container row text-center">
         <div class="col-8 mx-auto mt-5">

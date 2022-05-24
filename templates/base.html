@@ -7,15 +7,8 @@
      <!-- Bootstrap CSS -->
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>LitReview</title>
-    <style>
-        .form-inline {
-            justify-content: center;
-        }
-        #login-form button {
-            float: right;
-        }
-    </style>
+    <title>{% block title %}LitReview{% endblock title %}</title>
+    {% block style %}{% endblock style %}
 </head>
 <body>
 

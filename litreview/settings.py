@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
+    'post.apps.PostConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -122,7 +123,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'account:login'
 
-LOGIN_REDIRECT_URL = 'base'
+LOGIN_REDIRECT_URL = 'post:posts'
 
 LOGOUT_URL = 'account:logout'
 

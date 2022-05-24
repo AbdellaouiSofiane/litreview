@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
+{% block style %}
+<style>
+    #login-form button {
+        float: right;
+    }
+</style>
+{% endblock style %}
+
 {% block content %}
 <div class="row">
     <div class="col-6 text-center">
