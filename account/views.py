@@ -54,8 +54,17 @@ def unfollow(request, user_id):
 def subscribe(request):
     form = SubscriptionForm(request.POST)
     if form.is_valid():
-        user_follows = form.save(commit=False)
-        if user_follows.followed_user not in request.user.following.all():
-            user_follows.user = request.user
-            user_follows.save()
+        user_follows_relation = form.save(commit=False)
+        followed_user = user_follows_relation.followed_user
+        user = request.user
+        if followed_user in user.following.all():
+            messages.warning(request, 'Vous être déjà abonné à %s' % followed_user)
+        elif followed_user == user:
+            messages.warning(request, 'Vous ne pouvez pas vous abonner à vous même')
+        else:
+            messages.success(request, 'Vous être maintenant abonné à %s' % followed_user)
+            user_follows_relation.user = request.user
+            user_follows_relation.save()
+    else:
+        messages.warning(request, 'Aucun utilisateur ne correspond à votre saisie')
     return redirect('account:subscriptions')
