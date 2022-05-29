@@ -32,8 +32,11 @@ class Ticket(Post):
         return f'ticket n°{self.id} of {self.user.username}'
 
 
-# class Review(models.Model):
-#     ticket = models.ForeignKey(
-#         Ticket, on_delete=models.CASCADE, related_name="reviews")
-#     rating = models.PositiveSmallIntegerField(
-#         'note', validators=[MinValueValidator(0), MaxValueValidator(5)])
+class Review(Post):
+    ticket = models.ForeignKey(
+        Ticket, on_delete=models.CASCADE, related_name="reviews")
+    rating = models.PositiveSmallIntegerField(
+        'note', validators=[MinValueValidator(0), MaxValueValidator(5)])
+
+    def __str__(self):
+        return f'review for ticket {self.ticket.title} by {self.user.username}'
