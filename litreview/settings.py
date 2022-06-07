@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'post.apps.PostConfig',
     'crispy_forms',
+    'extra_views',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

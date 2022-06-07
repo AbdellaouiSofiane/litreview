@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+<style>
+    .form-check {
+        display: inline;
+        padding: 5%;
+    }
+    .btn-primary {
+        float: right;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mx-auto mb-5">
+        <h2 class="text-center">Créer une critique</h2>
+        <form method="post" class="mt-5" enctype="multipart/form-data">
+            <h5 class="mb-3">Livre/Article:</h5>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <hr class="mt-2 mb-2">
+            <h5 class="mb-3">Critique:</h5>
+            {% for formset in inlines %}
+                {{ formset|crispy }}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
