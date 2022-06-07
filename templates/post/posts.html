@@ -2,19 +2,38 @@
 
 {% block style %}
 <style>
-    .btn-outline-dark {
-        width: 100%;
+    .post {
+        border: 1px solid black;
+    }
+    img {
+        max-width: 100%;
+    }
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
     }
 </style>
 {% endblock style %}
 
 {% block content %}
-<div class="container row w-75 mx-auto">
-    <div class="col-6 mx-auto">
-        <a href="{% url 'post:add_ticket' %}" class="btn btn-outline-dark">Demander une critique</a>
-    </div>
-    <div class="col-6 mx-auto">
-        <a href="{% url 'post:add_ticket_and_review' %}" class="btn btn-outline-dark">Créer une critique</a>
-    </div>
+<div class="container w-75">
+    <h2 class="text-center w-100">Vos posts</h2>
+    {% for post in posts %}
+        <div class="container-fluid post mt-3">
+            {% if post.content_type == 'TICKET' %}
+                <p class="mt-2">Vous avez publié un ticket</p>
+                {% include 'partials/ticket-snippet.html' %}
+            {% else %}
+                <p class="mt-2">Vous avez publié une critique</p>
+                {% include 'partials/review-snippet.html' %}
+            {% endif %}
+            <div class="buttons mt-2 mb-2">
+                <button class="btn btn-outline-dark mr-3">Modifier</button>
+                <button class="btn btn-outline-dark">Supprimer</button>
+            </div>
+        </div>
+    {% empty %}
+        <p>Vous n'avez pas encore de posts</p>
+    {% endfor %}
 </div>
 {% endblock content %}

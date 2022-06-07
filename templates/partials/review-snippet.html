@@ -1,0 +1,10 @@
+<p style="float: right">{{ post.time_created }}</p>
+<p>{{ post.title }} -
+    {% for i in '012345'|make_list %}
+        <span><i class="bi bi-star{% if post.rating >= forloop.counter0 %}-fill{% endif %}"></i></span>
+    {% endfor %}
+</p>
+<p>{{ post.description }}</p>
+<div class="container post">
+    {% include 'partials/ticket-snippet.html' with post=post.ticket embedded=True%}
+</div>

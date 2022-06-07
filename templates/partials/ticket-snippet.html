@@ -1,0 +1,16 @@
+{% if embedded %}
+    <p class="mt-2">
+        Ticket -
+        {% if request.user == post.user %}
+            Vous
+        {% else %}
+            {{ post.user.username }}
+        {% endif %}
+    </p>
+{% endif %}
+<p style="float: right">{{ post.time_created }}</p>
+<p>{{ post.title }}</i></p>
+<p>{{ post.description }}</p>
+{% if post.picture %}
+    <img src="{{ post.picture.url }}" alt="{{ post.title }}">
+{% endif %}
