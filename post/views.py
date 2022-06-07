@@ -1,13 +1,13 @@
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from extra_views import CreateWithInlinesView, InlineFormSetFactory
-from .forms import ReviewForm
+from .forms import ReviewForm, TicketUpdateForm
 from .models import Ticket, Review
+
 
 class TicketCreateView(CreateView):
     model = Ticket
     fields = ['title', 'description', 'picture']
-    template_name = 'post/ticket_form.html'
     success_url = reverse_lazy('post:posts')
 
     def form_valid(self, form):
@@ -16,6 +16,11 @@ class TicketCreateView(CreateView):
         self.object = ticket.save()
         return super().form_valid(form)
 
+
+class TicketUpdateView(UpdateView):
+    model = Ticket
+    form_class = TicketUpdateForm
+    success_url = reverse_lazy('post:posts')
 
 
 class ReviewInline(InlineFormSetFactory):
@@ -26,8 +31,8 @@ class ReviewInline(InlineFormSetFactory):
 
 class TicketAndReviewCreateView(CreateWithInlinesView):
     model = Ticket
-    inlines = [ReviewInline,]
     fields = ['title', 'description', 'picture']
+    inlines = [ReviewInline,]
     template_name = 'post/ticket_and_review.html'
     success_url = reverse_lazy('post:posts')
 
