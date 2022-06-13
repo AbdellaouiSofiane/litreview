@@ -1,4 +1,5 @@
 from itertools import chain
+from turtle import pd
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -33,6 +34,37 @@ class TicketUpdateView(LoginRequiredMixin, UpdateView):
 class TicketDeleteView(LoginRequiredMixin, DeleteView):
     model = Ticket
     success_url = reverse_lazy('post:posts')
+
+
+class ReviewCreateView(LoginRequiredMixin, CreateView):
+    model = Review
+    form_class = ReviewForm
+    success_url = reverse_lazy('post:posts')
+
+    def get(self, request, *args, **kwargs):
+        self.ticket = Ticket.objects.get(
+            pk=kwargs.get('ticket_id')
+        )
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        self.ticket = Ticket.objects.get(
+            pk=kwargs.get('ticket_id')
+        )
+        return super().post(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ticket'] = self.ticket
+        return context
+
+    def form_valid(self, form):
+        review = form.save(commit=False)
+        review.ticket = self.ticket
+        review.user = self.request.user
+        review.save()
+        return super().form_valid(form)
+
 
 
 class ReviewUpdateView(LoginRequiredMixin, UpdateView):

@@ -39,9 +39,11 @@
             {% if post.content_type == 'TICKET' %}
                 <p class="mt-2">Vous avez publié un ticket</p>
                 {% include 'partials/ticket-snippet.html' %}
-                <div class="buttons mt-2 mb-2">
-                    <a class="btn btn-outline-dark mr-3" href="">Créer une critique</a>
-                </div>
+                {% if not post.reviews.all %}
+                    <div class="buttons mt-2 mb-2">
+                        <a class="btn btn-outline-dark mr-3" href="{% url 'post:create_review' post.id %}">Créer une critique</a>
+                    </div>
+                {% endif %}
             {% else %}
                 <p class="mt-2">Vous avez publié une critique</p>
                 {% include 'partials/review-snippet.html' %}

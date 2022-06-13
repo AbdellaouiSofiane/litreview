@@ -26,7 +26,11 @@
         <div class="container mt-5" style="border: 1px solid;">
             <p class="mt-2">Vous êtes en train de poster en réponse à</p>
             <div class="container mb-5" style="border: 1px solid; width: 90%;">
-                {% include 'partials/ticket-snippet.html' with post=object.ticket embedded=True %}
+                {% if object %}
+                    {% include 'partials/ticket-snippet.html' with post=object.ticket embedded=True %}
+                {% else %}
+                    {% include 'partials/ticket-snippet.html' with post=ticket embedded=True %}
+                {% endif %}
             </div>
         </div>
         <div class="container" style="border: 1px solid;">
