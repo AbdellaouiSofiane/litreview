@@ -23,14 +23,24 @@
             {% if post.content_type == 'TICKET' %}
                 <p class="mt-2">Vous avez publié un ticket</p>
                 {% include 'partials/ticket-snippet.html' %}
+                <div class="buttons mt-2 mb-2">
+                    <a class="btn btn-outline-dark mr-3" href="{% url 'post:update_ticket' post.id %}">Modifier</a>
+                    <form method="POST" action="{% url 'post:delete_ticket' post.id %}">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-outline-dark" value="Supprimer">
+                    </form>
+                </div>
             {% else %}
                 <p class="mt-2">Vous avez publié une critique</p>
                 {% include 'partials/review-snippet.html' %}
+                <div class="buttons mt-2 mb-2">
+                    <a class="btn btn-outline-dark mr-3" href="">Modifier</a>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-outline-dark" value="Supprimer">
+                    </form>
+                </div>
             {% endif %}
-            <div class="buttons mt-2 mb-2">
-                <button class="btn btn-outline-dark mr-3">Modifier</button>
-                <button class="btn btn-outline-dark">Supprimer</button>
-            </div>
         </div>
     {% empty %}
         <p>Vous n'avez pas encore de posts</p>

@@ -3,7 +3,7 @@ from itertools import chain
 from django.db.models import CharField, Value
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from extra_views import CreateWithInlinesView, InlineFormSetFactory
 
 from .forms import ReviewForm, TicketUpdateForm
@@ -25,7 +25,12 @@ class TicketCreateView(CreateView):
 class TicketUpdateView(UpdateView):
     model = Ticket
     form_class = TicketUpdateForm
-    success_url = reverse_lazy('post:feed')
+    success_url = reverse_lazy('post:posts')
+
+
+class TicketDeleteView(DeleteView):
+    model = Ticket
+    success_url = reverse_lazy('post:posts')
 
 
 class ReviewInline(InlineFormSetFactory):
@@ -39,7 +44,7 @@ class TicketAndReviewCreateView(CreateWithInlinesView):
     fields = ['title', 'description', 'picture']
     inlines = [ReviewInline,]
     template_name = 'post/ticket_and_review.html'
-    success_url = reverse_lazy('post:feed')
+    success_url = reverse_lazy('post:posts')
 
     def form_valid(self, form):
         ticket = form.save(commit=False)

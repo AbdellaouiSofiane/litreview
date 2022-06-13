@@ -16,7 +16,9 @@
 {% block content %}
 <div class="row">
     <div class="col-12 mx-auto mb-5">
-        <h2 class="text-center">Créer une critique</h2>
+        <h2 class="text-center">
+            {% if object %}Modifier votre{% else %}Créer une{% endif %} critique
+        </h2>
         <form method="post" class="mt-5" enctype="multipart/form-data">
             <h5 class="mb-3">Livre/Article:</h5>
             {% csrf_token %}
