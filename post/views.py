@@ -33,6 +33,20 @@ class TicketDeleteView(DeleteView):
     success_url = reverse_lazy('post:posts')
 
 
+class ReviewUpdateView(UpdateView):
+    model = Review
+    form_class = ReviewForm
+    success_url = reverse_lazy('post:posts')
+
+    def get_queryset(self):
+        return Review.objects.select_related('ticket')
+
+
+class ReviewDeleteView(DeleteView):
+    model = Review
+    success_url = reverse_lazy('post:posts')
+
+
 class ReviewInline(InlineFormSetFactory):
     model = Review
     form_class = ReviewForm

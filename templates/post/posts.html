@@ -34,8 +34,8 @@
                 <p class="mt-2">Vous avez publié une critique</p>
                 {% include 'partials/review-snippet.html' %}
                 <div class="buttons mt-2 mb-2">
-                    <a class="btn btn-outline-dark mr-3" href="">Modifier</a>
-                    <form method="POST" action="">
+                    <a class="btn btn-outline-dark mr-3" href="{% url 'post:update_review' post.id %}">Modifier</a>
+                    <form method="POST" action="{% url 'post:delete_review' post.id %}">
                         {% csrf_token %}
                         <input type="submit" class="btn btn-outline-dark" value="Supprimer">
                     </form>
@@ -43,7 +43,7 @@
             {% endif %}
         </div>
     {% empty %}
-        <p>Vous n'avez pas encore de posts</p>
+        <p class="text-center mt-5">Vous n'avez pas encore de posts</p>
     {% endfor %}
 </div>
 {% endblock content %}

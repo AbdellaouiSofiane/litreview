@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block style %}
+<style>
+    .form-check {
+        display: inline;
+        padding: 5%;
+    }
+    .btn-primary {
+        float: right;
+    }
+    img {
+        max-width: 100%;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mx-auto mb-5">
+        <h2 class="text-center">
+            {% if object %}Modifier votre{% else %}Créer une{% endif %} critique
+        </h2>
+        <div class="container mt-5" style="border: 1px solid;">
+            <p class="mt-2">Vous êtes en train de poster en réponse à</p>
+            <div class="container mb-5" style="border: 1px solid; width: 90%;">
+                {% include 'partials/ticket-snippet.html' with post=object.ticket embedded=True %}
+            </div>
+        </div>
+        <div class="container" style="border: 1px solid;">
+            <p class="mt-2">Critique:</p>
+            <form method="post" class="container">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div style="min-height: 50px;">
+                    <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

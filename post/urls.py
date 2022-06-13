@@ -4,7 +4,8 @@ from django.views.generic import TemplateView
 
 from .views import (
     TicketCreateView, TicketUpdateView, TicketDeleteView,
-    TicketAndReviewCreateView, posts
+    ReviewUpdateView, TicketAndReviewCreateView, ReviewDeleteView,
+    posts
 )
 
 
@@ -17,4 +18,6 @@ urlpatterns = [
     path('update_ticket/<int:pk>', TicketUpdateView.as_view(), name='update_ticket'),
     path('delete_ticket/<int:pk>', TicketDeleteView.as_view(), name='delete_ticket'),
     path('add_ticket_and_review/', TicketAndReviewCreateView.as_view(), name='add_ticket_and_review'),
+    path('update_review/<int:pk>', ReviewUpdateView.as_view(), name='update_review'),
+    path('delete_review/<int:pk>', ReviewDeleteView.as_view(), name='delete_review'),
 ]
